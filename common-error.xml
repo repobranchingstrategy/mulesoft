@@ -15,18 +15,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 
   <context:property-placeholder order="10" location="classpath:hertz-mule-error-type.properties,classpath:hertz-mule-error-desc.properties"
     ignore-unresolvable="true" ignore-resource-not-found="true" />
- 
-	<spring:beans>
-		<spring:import resource="classpath:api-common-error.xml" />
-		<spring:import resource="classpath:messaging-common-error.xml" />
-		<spring:import resource="classpath:auditing-framework.xml" />
-	</spring:beans>
 
-	<flow name="build-response-SubFlow">
-		<set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
-    <set-variable variableName="commonError"
-      value="#[org.mule.util.ExceptionUtils.getRootCauseMessage(exception)]" doc:name="exceptionMessage" />
-		<dw:transform-message doc:name="Transform Message">
 			<dw:set-payload><![CDATA[%dw 1.0
 %output application/json
 ---
